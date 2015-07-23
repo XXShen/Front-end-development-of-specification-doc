@@ -1,0 +1,267 @@
+# 前端规范 by@xxShen
+
+--------
+初衷：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
+
+目标：不管有多少人共同参与同一项目，一定要确保每一行代码都像是同一个人编写的。
+
+定律：遵循同一套编码规范 -- 可以是这里列出的，也可以是你自己总结的。这个规范里存在争议和错误，欢迎讨论和指正。
+
+
+## 目录
+
+### HTML
+  - [语法](#htmlType01)
+  - [HTML基础设施](#htmlType02)
+  - [布尔（boolean）型属性](#htmlType03)
+  - [减少标签的数量](#htmlType04)
+  - [JavaScript 生成的标签](#htmlType05)
+  
+### CSS
+  - [CSS语法](#cssType01)
+  - [不要使用 <span style="color:#f60;">@import</span>](#cssType02)
+  - [简写形式的属性声明](#cssType03)
+  - [注释](#cssType04)
+  - [class 命名](#cssType05)
+  - [选择器](#cssType06)
+  
+### 其他
+  - [编辑器配置](#otherType01)
+  
+  
+## <span id="htmlType01">语法</span>
+  - 用4个空格来代替tab（制表符） -- 这是唯一能保证在所有环境下获得一致展现的方法。绝大部分的编辑器都可修改tab为4个空格
+  
+  - 嵌套元素应该锁进1次
+  
+  - 属性的定义，确保全部使用双引号，绝不要使用单引号
+  
+  - 不要在自闭合（self-closing）元素的尾部添加斜线。(搜HTML5规范，明确的说)
+  
+  - 不要省略可选的结束标签（closing tag）（举个栗子，</span> 或 </body>）。
+  
+``` 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page title</title>
+    </head>
+    <body>
+        <img src="images/company-logo.png" alt="Company">
+        <h1 class="hello-world">Hello, world!</h1>
+    </body>
+</html>
+```
+  
+## <span id="htmlType02">HTML基础设施</span>
+  - 文件应以“<!DOCTYPE ......>”首行顶格开始，推荐使用“<!DOCTYPE html>”
+  
+  - 必须申明文档的编码charset，且与文件本身编码保持一致，使用UTF-8编码<meta charset="utf-8"/>
+  
+  - 根据页面内容和需求填写适当的keywords和description(按需求来，不做强求)
+  
+  - 结构、表现、行为三者分离，避免内联
+  
+  - 使用link将css文件引入，并置于head中。
+  
+  - 使用script将js文件引入，并置于body底部
+  
+  - 强烈建议为 html 根元素指定 <span style="color:#f60;">lang</span> 属性
+  
+  - 根据 HTML5 规范，在引入 CSS 和 JavaScript 文件时一般不需要指定 <span style="color:#f60;">type</span> 属性，因为 <span style="color:#f60;">text/css</span> 和 <span style="color:#f60;">text/javascript</span> 分别是它们的默认值
+  
+  - 遵循 HTML 标准和语义，但是不要以牺牲实用性为代价。任何时候都要尽量使用最少的标签并保持最小的复杂度
+  
+```
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>才客：好玩的人才众筹网站</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="img/favicon.ico" />
+        <link rel="apple-touch-icon" href="img/touchicon.png" />
+    </head>
+    <body>
+        ……
+        <script src="js/dome.js"></script>  
+    </body>
+</html>
+```
+##<span id="htmlType03">布尔（boolean）型属性</span>
+  - 布尔型属性可以在声明时不赋值。XHTML 规范要求为其赋值，但是 HTML5 规范不需要。
+  元素的布尔型属性如果有值，就是 true，如果没有值，就是 false。如果一定要为其赋值的话，请参考 WhatWG 规范：
+如果属性存在，其值必须是空字符串或 [...] 属性的规范名称，并且不要再收尾添加空白符。
+**简单来说，就是不用赋值**。
+
+## <span id="htmlType04">减少标签的数量</span>
+ - 编写 HTML 代码时，尽量避免多余的父元素。很多时候，这需要迭代和重构来实现。请看下面的案例： 
+ 
+```
+<span class="avatar"><!--not good-->
+  <img src="...">
+</span>
+
+<img class="avatar" src="..."><!--better-->
+```
+##<span id="htmlType05">JavaScript 生成的标签</span>
+ - 通过 JavaScript 生成的标签让内容变得不易查找、编辑，并且降低性能。能避免时尽量避免。
+ 
+## <span id="cssType01">CSS语法</span>
+ - 用4个空格来代替制表符（tab）
+ 
+ - 为选择器分组时，将单独的选择器单独放在一行。
+ 
+ - 为了代码的易读性，在每个声明块的左花括号前添加一个空格。
+ 
+ - 声明块的右花括号应当单独成行。
+ 
+ - 每条声明语句的 : 后应该插入一个空格。
+ 
+ - 为了获得更准确的错误报告，每条声明都应该独占一行。
+ 
+ - 所有声明语句都应当以分号结尾。最后一条声明语句后面的分号是可选的，但是，如果省略这个分号，你的代码可能更易出错。
+ 
+ - 对于以逗号分隔的属性值，每个逗号后面都应该插入一个空格（例如，<span style="color:#f60;">box-shadow</span>）。
+ 
+ - 不要在 <span style="color:#f60;">rgb()</span>、<span style="color:#f60;">rgba()</span>、<span style="color:#f60;">hsl()</span>、<span style="color:#f60;">hsla()</span> 或 <span style="color:#f60;">rect()</span> 值的内部的逗号后面插入空格。这样利于从多个属性值（既加逗号也加空格）中区分多个颜色值（只加逗号，不加空格）。
+ 
+ - 对于属性值或颜色参数，省略小于 1 的小数前面的 0 （例如，<span style="color:#f60;">.5</span> 代替 <span style="color:#f60;">0.5</span>；<span style="color:#f60;">-.5px</span> 代替 <span style="color:#f60;">-0.5px</span>）。
+ 
+ - 十六进制值应该全部小写，例如，#fff。在扫描文档时，小写字符易于分辨，因为他们的形式更易于区分。
+ 
+ - 尽量使用简写形式的十六进制值，例如，用 <span style="color:#f60;">#fff</span> 代替 <span style="color:#f60;">#ffffff</span>。
+
+ - 为选择器中的属性添加双引号，例如，<span style="color:#f60;">input[type="text"]</span>。只有在某些情况下是可选的，但是，为了代码的一致性，建议都加上双引号。
+
+ - 避免为 0 值指定单位，例如，用 <span style="color:#f60;">margin: 0</span>; 代替 <span style="color:#f60;">margin: 0px</span>;。
+
+```
+/* Bad CSS */
+.selector, .selector-secondary, .selector[type=text] {
+  padding:15px;
+  margin:0px 0px 15px;
+  background-color:rgba(0, 0, 0, 0.5);
+  box-shadow:0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF
+}
+
+/* Good CSS */
+.selector,
+.selector-secondary,
+.selector[type="text"] {
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: rgba(0,0,0,.5);
+  box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
+}
+```
+## <span id="cssType02">不要使用 <em style="color:#f60;">@import</em></span>
+ - 与 <link> 标签相比，@import 指令要慢很多，不光增加了额外的请求次数，还会导致不可预料的问题。替代办法有以下几种：
+ 
+   - 使用多个 <link> 元素
+ 
+   - 通过 Sass 或 Less 类似的 CSS 预处理器将多个 CSS 文件编译为一个文件
+ 
+   - 通过 Rails、Jekyll 或其他系统中提供过 CSS 文件合并功能
+   
+## <span id="cssType03">简写形式的属性声明   </span>
+在需要显示地设置所有值的情况下，应当尽量限制使用简写形式的属性声明。常见的滥用简写属性声明的情况如下：
+
+- <span style="color:#f60;">padding</span>
+- <span style="color:#f60;">margin</span>
+- <span style="color:#f60;">font</span>
+- <span style="color:#f60;">background</span>
+- <span style="color:#f60;">border</span>
+- <span style="color:#f60;">border-radius</span>
+    
+不需要为简写形式的属性声明指定所有值。例如，HTML 的 heading 元素只需要设置上、下边距（margin）的值，因此，在必要的时候，只需覆盖这两个值就可以。过度使用简写形式的属性声明会导致代码混乱，并且会对属性值带来不必要的覆盖从而引起意外的副作用。
+
+```
+/* Bad example */
+.element {
+  margin: 0 0 10px;
+  background: red;
+  background: url("image.jpg");
+  border-radius: 3px 3px 0 0;
+}
+
+/* Good example */
+.element {
+  margin-bottom: 10px;
+  background-color: red;
+  background-image: url("image.jpg");
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+```
+
+##<span id="cssType04">注释</span>
+代码是由人编写并维护的。请确保你的代码能够自描述、注释良好并且易于他人理解。好的代码注释能够传达上下文关系和代码目的。不要简单地重申组件或 class 名称。
+
+对于较长的注释，务必书写完整的句子；对于一般性注解，可以书写简洁的短语。
+
+```
+/* Bad example */
+/* Modal header */
+.modal-header {
+  ...
+}
+
+/* Good example */
+/* Wrapping element for .modal-title and .modal-close */
+.modal-header {
+  ...
+}
+```
+
+##<span id="cssType05">class 命名</span>
+- class 名称中只能出现小写字符驼峰法（不是下划线，也不是破折号）。破折号应当用于相关 class 的命名（类似于命名空间）（例如，.btn 和 .btn-danger）。
+- 避免过度任意的简写。.btn 代表 button，但是 .s 不能表达任何意思。
+- class 名称应当尽可能短，并且意义明确。
+- 使用有意义的名称。使用有组织的或目的明确的名称，不要使用表现形式（presentational）的名称。
+- 基于最近的父 class 或基本（base） class 作为新 class 的前缀。
+- 使用 .js-* class 来标识行为（与样式相对），并且不要将这些 class 包含到 CSS 文件中。
+
+在为 Sass 和 Less 变量命名是也可以参考上面列出的各项规范。
+
+```
+/* Bad example */
+.t { ... }
+.red { ... }
+.header { ... }
+
+/* Good example */
+.tweet { ... }
+.important { ... }
+.tweetHeader { ... }
+```
+##<span id="cssType06">选择器</span>
+- 对于通用元素使用 class ，这样利于渲染性能的优化。
+- 对于经常出现的组件，避免使用属性选择器（例如，[class^="..."]）。浏览器的性能会受到这些因素的影响。
+- 选择器要尽可能短，并且尽量限制组成选择器的元素个数，建议不要超过 3 。
+- **只有**在必要的时候才将 class 限制在最近的父元素内（也就是后代选择器）（例如，不使用带前缀的 class 时 -- 前缀类似于命名空间）。
+
+```
+/* Bad example */
+span { ... }
+.page-container #stream .stream-item .tweet .tweet-header .username { ... }
+.avatar { ... }
+
+/* Good example */
+.avatar { ... }
+.tweet-header .username { ... }
+.tweet .avatar { ... }
+```
+##<span id="otherType01">编辑器配置</span>
+将你的编辑器按照下面的配置进行设置，以避免常见的代码不一致和差异：
+
+- 用4个空格代替制表符（soft-tab 即用空格代表 tab 符）。
+- 保存文件时，删除尾部的空白符。
+- 设置文件编码为 UTF-8。
+- 在文件结尾添加一个空白行。
+
+ 
+ 
